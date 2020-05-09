@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import *
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('шкура.ui', self)
+        uic.loadUi('file.ui', self)
         self.map_api_server = "http://static-maps.yandex.ru/1.x/"
         self.pushButton.clicked.connect(self.click)
 
