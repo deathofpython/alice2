@@ -57,7 +57,7 @@ def handle_dialog(req, res):
         return
 
     res['response']['text'] = \
-        f"Все говорят '{req['request']['original_utterance']}', а ты купи {obj[k][:-1]}!"
+        f"Все говорят '{req['request']['original_utterance']}', а ты купи {obj[k]}!"
     res['response']['buttons'] = get_suggests(user_id)
 
 
@@ -74,7 +74,7 @@ def get_suggests(user_id):
     if len(suggests) < 2:
         suggests.append({
             "title": "Ладно",
-            "url": "https://market.yandex.ru/search?text=" + obj[k],
+            "url": "https://market.yandex.ru/search?text=" + obj[k][:-1],
             "hide": True
         })
 
