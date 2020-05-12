@@ -102,11 +102,29 @@ def handle_dialog(res, req):
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
-            if 'Помощь' in req:
+            if 'Помощь' in req['request']['original_utterance']:
                 res['response']['text'] = 'Справка по игре: доступные города - Москва, Париж, Нью-Йорк'
             else:
                 res['response']['text'] = \
                     'Первый раз слышу об этом городе. Попробуй еще разок!'
+        res['response']['buttons'] = [
+            {
+                'title': 'Помощь',
+                'hide': True
+            },
+            {
+                'title': 'Москва',
+                'hide': True
+            },
+            {
+                'title': 'Париж',
+                'hide': True
+            },
+            {
+                'title': 'Нью-Йорк',
+                'hide': True
+            }
+        ]
 
 
 def get_city(req):
