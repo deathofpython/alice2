@@ -6,6 +6,9 @@ import os
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
+k = 0
+obj = ['Слона', 'Кролика']
+
 sessionStorage = {}
 
 
@@ -28,6 +31,7 @@ def main():
 
 
 def handle_dialog(req, res):
+    global k
     user_id = req['session']['user_id']
 
     if req['session']['new']:
@@ -38,17 +42,22 @@ def handle_dialog(req, res):
                 "Отстань!",
             ]
         }
-        res['response']['text'] = 'Привет! Купи слона!'
+        res['response']['text'] = 'Привет! Купи ' + obj[k].lower() + '!'
         res['response']['buttons'] = get_suggests(user_id)
         return
     if any(i in req['request']['original_utterance'].lower() for i in ['ладно', 'куплю', 'покупаю',
                                                                        'хорошо', 'я покупаю', 'я куплю']):
-        res['response']['text'] = 'Слона можно найти на Яндекс.Маркете!'
-        res['response']['end_session'] = True
+        res['response']['text'] = obj[k] + ' можно найти на Яндекс.Маркете!'
+        if k == 0:
+            k = 1
+            res['response']['text'] += '\nА теперь купи ' + obj[k] + '!'
+        else:
+            k = 0
+            res['response']['end_session'] = True
         return
 
     res['response']['text'] = \
-        f"Все говорят '{req['request']['original_utterance']}', а ты купи слона!"
+        f"Все говорят '{req['request']['original_utterance']}', а ты купи {obj[k]}!"
     res['response']['buttons'] = get_suggests(user_id)
 
 
@@ -65,7 +74,7 @@ def get_suggests(user_id):
     if len(suggests) < 2:
         suggests.append({
             "title": "Ладно",
-            "url": "https://market.yandex.ru/search?text=слон",
+            "url": "https://market.yandex.ru/search?text=" + obj[k],
             "hide": True
         })
 
