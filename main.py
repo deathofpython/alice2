@@ -41,14 +41,14 @@ def handle_dialog(req, res):
         res['response']['text'] = 'Привет! Купи слона!'
         res['response']['buttons'] = get_suggests(user_id)
         return
-    if req['request']['original_utterance'].lower() in [
+    if any(i in req['request']['original_utterance'].lower() for i in [
         'ладно',
         'куплю',
         'покупаю',
         'хорошо'
         'я покупаю'
         'я куплю'
-    ]:
+    ]):
         res['response']['text'] = 'Слона можно найти на Яндекс.Маркете!'
         res['response']['end_session'] = True
         return
