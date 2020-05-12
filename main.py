@@ -68,7 +68,7 @@ def handle_dialog(res, req):
             # получаем варианты buttons из ключей нашего словаря cities
             res['response']['buttons'] = [
                 {
-                    'title': 'Справка',
+                    'title': 'Помощь',
                     'hide': True
                 },
                 {
@@ -102,7 +102,7 @@ def handle_dialog(res, req):
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
-            if city == 'Справка':
+            if 'справка' in req:
                 res['response']['text'] = 'Справка по игре: доступные города - Москва, Париж, Нью-Йорк'
             else:
                 res['response']['text'] = \
