@@ -68,10 +68,11 @@ def handle_dialog(res, req):
             # получаем варианты buttons из ключей нашего словаря cities
             res['response']['buttons'] = [
                 {
-                    'title': city.title(),
+                    'title': 'справка',
                     'hide': True
-                } for city in cities
+                }
             ]
+
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
