@@ -2,6 +2,13 @@ import requests
 from math import sin, cos, sqrt, atan2, radians
 
 
+def get_geo_info(city_name, type_info):
+    if type_info == 'country':
+        return get_country(city_name)
+    if type_info == 'coordinates':
+        return get_coordinates(city_name)
+
+
 def get_coordinates(city):
 
     url = "https://geocode-maps.yandex.ru/1.x/"
