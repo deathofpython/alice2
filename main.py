@@ -32,7 +32,12 @@ def handle_dialog(res, req):
             'first_name': None
         }
         return
-    res['response']['text'] = translate_text(req['request']['original_utterance'])
+    if 'переведи слово' == req['request']['original_utterance'].lower()[:14]:
+        res['response']['text'] = translate_text(req['request']['original_utterance'][14:])
+    elif 'переведите слово' == req['request']['original_utterance'].lower()[:16]:
+        res['response']['text'] = translate_text(req['request']['original_utterance'][16:])
+    else:
+        res['response']['text'] = 'Не совсем понимаю что вы хотите перевести'
 
 
 if __name__ == '__main__':
