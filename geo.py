@@ -7,6 +7,7 @@ def get_coordinates(city):
     url = "https://geocode-maps.yandex.ru/1.x/"
 
     params = {
+        'apikey': "40d1649f-0493-4b70-98ba-98533de7710b",
         'geocode': city,
         'format': 'json'
     }
@@ -15,7 +16,6 @@ def get_coordinates(city):
     json = response.json()
     point_str = json['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']
     point_array = [float(x) for x in point_str.split(' ')]
-
     return point_array
 
 
@@ -24,6 +24,7 @@ def get_country(city):
     url = "https://geocode-maps.yandex.ru/1.x/"
 
     params = {
+        'apikey': "40d1649f-0493-4b70-98ba-98533de7710b",
         'geocode': city,
         'format': 'json'
     }
