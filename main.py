@@ -32,7 +32,7 @@ def handle_dialog(res, req):
             'first_name': None
         }
         return
-    res['response']['text'] = translate_text(req['request']['original_utterance'][14:])
+    res['response']['text'] = translate_text(req['request']['original_utterance'])
 
 
 if __name__ == '__main__':
